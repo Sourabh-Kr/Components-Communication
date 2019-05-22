@@ -1,26 +1,37 @@
-import React from 'react';
+import React,{Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { ChildComponent } from './Component/ChildComponent';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  constructor(){
+    super()
+    this.state={
+      newMessage:"I am Sourabh from parent"
+    }
+  }
+  sayHello(){
+    alert("Hello I am from Parent Component")
+  }
+  changesState(value){
+    this.setState({
+      newMessage: value
+    })
+  }
+  render(){
+    return(
+      <div className="App">
+        <ChildComponent name={this.state.newMessage} greet={this.sayHello} changeState={(newValue)=>{
+          this.changesState(newValue)
+        }}></ChildComponent>
+        <br></br>
+        {/* <button onClick={this.sayHello}>Click me</button> */}
+      </div>
+    )
+  }
+
 }
+  
+
 
 export default App;
